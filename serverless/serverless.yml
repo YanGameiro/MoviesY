@@ -1,0 +1,20 @@
+service: movies-list-movies
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  memorySize: 128
+  timeout: 3
+
+functions:
+  index:
+    handler: index.handler
+    description: List some movies
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
